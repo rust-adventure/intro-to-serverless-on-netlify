@@ -1,0 +1,20 @@
+[package]
+name = "intro-to-netlify-serverless-with-rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+http = "0.2.9"
+lambda_http = { version = "0.8.1", default-features = false, features = [
+    "apigw_rest",
+] }
+lambda_runtime = "0.8.1"
+serde = { version = "1.0.179", features = ["derive"] }
+serde_json = "1.0.104"
+tokio = { version = "1.29.1", features = ["macros"] }
+tracing = { version = "0.1", features = ["log"] }
+tracing-subscriber = { version = "0.3.17", default-features = false, features = [
+    "fmt",
+] }
