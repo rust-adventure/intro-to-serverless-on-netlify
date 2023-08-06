@@ -3,12 +3,14 @@ use lambda_http::{
     Error, Request, RequestExt, Response,
 };
 use serde::Serialize;
+use tracing::{info, instrument};
 
 #[derive(Serialize)]
 struct ApiResponse {
     data: String,
 }
 
+#[instrument]
 async fn function_handler(
     event: Request,
 ) -> Result<Response<Body>, Error> {
@@ -18,8 +20,9 @@ async fn function_handler(
         .unwrap_or("world");
 
     let message = format!(
-            "Hello {who}, this is an Netlify serverless request"
-        );
+        "Hello {who}, this is an Netlify serverless request"
+    );
+    info!(who, message);
     let api_response = ApiResponse { data: message };
     let body_text = serde_json::to_string(&api_response)?;
 
@@ -32,5 +35,7 @@ async fn function_handler(
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
+    tracing_subscriber::fmt().init();
+
     run(service_fn(function_handler)).await
 }
