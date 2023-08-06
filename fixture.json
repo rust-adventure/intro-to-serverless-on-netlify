@@ -45,10 +45,10 @@
     "X-Forwarded-Proto": ["https"]
   },
   "queryStringParameters": {
-    "name": "me"
+    "name": "chris"
   },
   "multiValueQueryStringParameters": {
-    "name": ["me"]
+    "name": ["chris"]
   },
   "pathParameters": {
     "proxy": "hello/world"
